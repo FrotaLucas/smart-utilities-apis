@@ -43,9 +43,6 @@ public class Reading {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
  
-    
-
-
     public Long getId() {
         return id;
     }
