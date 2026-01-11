@@ -12,24 +12,26 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository)
+    {
         this.customerRepository = customerRepository;
     }
 
 
-    public Customer createCustomer (Customer customer) {
+    public Customer createCustomer (Customer customer)
+    {
 
         //toDo: handle validation
         // customer null check
         // mandatory fields check
-        
+
         Customer createdCustomer = customerRepository.save(customer);
 
         return createdCustomer;
     }  
     
-    public Customer getCustomerById (Long id) {
-
+    public Customer getCustomerById (Long id)
+    {
         //toDo: handle not found exception
         //Id == null check
 
@@ -38,11 +40,27 @@ public class CustomerService {
         return dbCustomer;
     }
 
-    public List<Customer> getAllCustomers() {
+    public List<Customer> getAllCustomers()
+    {
 
         List<Customer> dbCustomers = customerRepository.findAll();
 
         return dbCustomers;
+    }
+
+    public void deleleteCustomerById (Long id)
+    {
+        Customer dbCustomer = getCustomerById(id);
+
+       if ( dbCustomer == null)
+       {
+            //toDo:
+            //create Class ResourceNotFoundException extends RuntimeException ???
+            //throw new ResourceNotFoundException("Customer not found with id: " + id);
+       }
+
+       customerRepository.deleteById(id);
+
     }
 
 }
