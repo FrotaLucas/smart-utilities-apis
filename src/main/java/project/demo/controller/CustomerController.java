@@ -1,4 +1,5 @@
 package project.demo.controller;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import project.demo.model.Customer;
 import project.demo.service.Customer.CustomerService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -32,4 +36,24 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
 
+ 
+    @GetMapping("/{id}")
+    public ResponseEntity<Customer> getCustomerById(Long id)
+    {
+        Customer dbCustomer = customerService.getCustomerById(id);
+
+        //toDo
+        //handle exceptions and validation
+
+        return ResponseEntity.ok(dbCustomer);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Customer>> getCustomers()
+    {
+        List<Customer> dbCustomers = customerService.getAllCustomers();
+
+        return ResponseEntity.ok(dbCustomers);
+    }
+    
 }
