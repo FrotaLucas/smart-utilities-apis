@@ -63,4 +63,25 @@ public class CustomerService {
 
     }
 
+    public Customer updateCustomer (Long id, Customer customer)
+    {
+        Customer dbCustomer = getCustomerById(id);
+
+        //id == null or customer == null check
+
+        if ( dbCustomer == null)
+        {
+            //toDo:
+            // handle exception
+        }
+
+        dbCustomer.setFirstName(customer.getFirstName());
+        dbCustomer.setLastName(customer.getLastName());
+        dbCustomer.setBirthDate(customer.getBirthDate());
+        dbCustomer.setGender(customer.getGender());
+
+        Customer updatedCustomer = customerRepository.save(dbCustomer);
+
+        return updatedCustomer;
+    }
 }
