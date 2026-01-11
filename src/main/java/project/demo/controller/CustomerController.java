@@ -61,7 +61,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomer(@RequestParam Long id)
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id)
     {
         customerService.deleleteCustomerById(id);
 
@@ -73,7 +73,7 @@ public class CustomerController {
     {
         //toDo
         //handle exceptions and validation id and customer null check ??
-        
+
         Customer updatedCustomer = customerService.updateCustomer(id, customer);
 
         return ResponseEntity.ok(updatedCustomer);
