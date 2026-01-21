@@ -1,5 +1,5 @@
 package project.demo.service.Customer;
 
-public class ICustomerService {
+public interface CustomerService {
     
 }
