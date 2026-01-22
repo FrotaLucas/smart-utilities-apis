@@ -25,15 +25,24 @@ public class ReadingServiceImpl implements ReadingService{
 
     @Override
     public Reading getReadingById(Reading reading) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getReadingById'");
+
+        Reading dbReading = readingRepository.findById(reading.getId()).orElse(null);
+
+        //toDo: handle not found exception
+
+        return dbReading;
     }
 
 
     @Override
     public List<Reading> getAllReadings() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllReadings'");
+     
+        List<Reading> dbReadings = readingRepository.findAll();
+
+        //if (dbReadings.isEmpty())
+        //handle not found exception
+
+        return dbReadings;
     }
 
 
