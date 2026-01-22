@@ -51,16 +51,6 @@ public class ReadingController {
         return ResponseEntity.ok(dbReading);
     }
     
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReadingById(@RequestParam Long id)
-    {
-        //todo
-        //handle exceptions and validation id null check ??
-        readingService.deleleteReadingById(id);
-
-        return ResponseEntity.noContent().build();
-    }
-    
     @GetMapping
     public ResponseEntity<List<Reading>> getAllReadings()
     {
@@ -71,13 +61,24 @@ public class ReadingController {
 
         return ResponseEntity.ok(dbReadings);
     }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReadingById(@RequestParam Long id)
+    {
+        //todo
+        //handle exceptions and validation id null check ??
+        readingService.deleleteReadingById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+    
 
     @PutMapping("/{id}")
     public ResponseEntity<Reading> updateReading(@PathVariable Long id, @RequestBody Reading reading)
     {
         //todo
         //handle exceptions and validation
-        
+
         Reading updatedReading = readingService.updateReading(id, reading);
 
         return ResponseEntity.ok(updatedReading);
