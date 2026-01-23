@@ -8,8 +8,6 @@ public interface ReadingApplicationService {
     
     Reading createReading(Reading reading);
 
-    Reading createReadingForExistingCustomer(Reading reading);
-
     Reading getReadingById (Long id);
  
     List<Reading> getAllReadings();

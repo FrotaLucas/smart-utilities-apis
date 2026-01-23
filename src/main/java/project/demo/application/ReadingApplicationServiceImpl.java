@@ -42,12 +42,6 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
     }
 
     @Override
-    public Reading createReadingForExistingCustomer(Reading reading) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createReadingForExistingCustomer'");
-    }
-
-    @Override
     public Reading getReadingById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getReadingById'");
