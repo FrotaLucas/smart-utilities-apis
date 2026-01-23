@@ -38,7 +38,7 @@ public class ReadingController {
     public ResponseEntity<Reading> createReading(@RequestBody Reading reading)
     {
 
-        Reading createdReading = readingService.createReadingWithNewCustomer(reading);
+        Reading createdReading = readingService.createReading(reading);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdReading);
     }

@@ -6,7 +6,7 @@ import project.demo.model.Reading;
 
 public interface ReadingApplicationService {
     
-    Reading createReadingWithNewCustomer(Reading reading);
+    Reading createReading(Reading reading);
 
     Reading createReadingForExistingCustomer(Reading reading);
 

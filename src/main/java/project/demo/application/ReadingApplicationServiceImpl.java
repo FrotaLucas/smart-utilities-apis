@@ -20,7 +20,7 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
     }
 
     @Override
-    public Reading createReadingWithNewCustomer(Reading reading) {
+    public Reading createReading(Reading reading) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createReadingWithNewCustomer'");
     }
