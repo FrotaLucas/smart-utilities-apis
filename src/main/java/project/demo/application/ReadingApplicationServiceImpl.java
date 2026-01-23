@@ -52,8 +52,12 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
 
     @Override
     public List<Reading> getAllReadings() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllReadings'");
+        
+        List<Reading> allReadings = readingService.getAllReadings();
+        // toDo
+        //handle empty list exception
+
+        return allReadings;
     }
 
     @Override
