@@ -3,6 +3,7 @@ package project.demo.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.demo.application.Interfaces.ReadingApplicationService;
 import project.demo.model.Reading;
 import project.demo.service.Reading.ReadingService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,9 +26,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/api/readings")
 public class ReadingController {
     
-    private final ReadingService readingService;
+    private final ReadingApplicationService readingService;
 
-    public ReadingController(ReadingService readingService)
+    public ReadingController(ReadingApplicationService readingService)
     {
         this.readingService = readingService;
     }   
@@ -36,9 +37,9 @@ public class ReadingController {
     @PostMapping
     public ResponseEntity<Reading> createReading(@RequestBody Reading reading)
     {
-        
-        Reading createdReading = readingService.createReading(reading);
-        
+
+        Reading createdReading = readingService.createReadingWithNewCustomer(reading);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(createdReading);
     }
 
