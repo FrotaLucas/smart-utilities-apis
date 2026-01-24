@@ -3,6 +3,7 @@ package project.demo.service.Reading;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import project.demo.model.Reading;
 import project.demo.repository.ReadingRepository.ReadingRepository;
@@ -20,6 +21,7 @@ public class ReadingServiceImpl implements ReadingService{
     }
 
 
+    @Transactional
     public Reading createReading(Reading reading)
     {
         Reading createdReading = readingRepository.save(reading);
