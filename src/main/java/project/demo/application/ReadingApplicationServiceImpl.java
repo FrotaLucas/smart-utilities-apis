@@ -3,6 +3,7 @@ package project.demo.application;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import project.demo.application.Interfaces.ReadingApplicationService;
 import project.demo.model.Customer;
@@ -23,11 +24,13 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
         this.customerService = customerService;
     }
 
+    @Transactional
     @Override
     public Reading createReading(Reading reading) {
 
         Customer customer = new Customer();
 
+        
         Customer dbCustomer = customerService.getCustomerById(reading.getCustomer().getId());
 
         if(dbCustomer == null)
@@ -40,7 +43,7 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
         }
 
         reading.setCustomer(customer);
-    
+        
         return readingService.createReading(reading);
     }
 
