@@ -2,6 +2,7 @@
 seria possível reading vir sem nenhum customer ou  com customer Id?
 não devia ser tratado no frontend esse caso?
 
+//eliminar uuid da aplicacao
 
 *******
 {
