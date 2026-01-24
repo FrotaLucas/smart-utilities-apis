@@ -45,6 +45,11 @@ public class Reading {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
  
+    //delete this constructor   
+    public Reading() {
+        this.uuid = UUID.randomUUID();
+    }
+
     public Long getId() {
         return id;
     }
