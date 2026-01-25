@@ -2,7 +2,9 @@ package project.demo.application;
 
 import project.demo.application.Interfaces.CustomerApplicationService;
 import project.demo.model.Customer;
+import project.demo.model.Reading;
 import project.demo.service.Customer.CustomerService;
+import project.demo.service.Reading.ReadingService;
 
 import java.util.List;
 
@@ -13,10 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerApplicationServiceImpl implements CustomerApplicationService {
 
     private final CustomerService customerService;
+    private final ReadingService readingService;
 
-    public CustomerApplicationServiceImpl(CustomerService customerService)
+    public CustomerApplicationServiceImpl(CustomerService customerService, ReadingService readingService)
     {
         this.customerService = customerService;
+        this.readingService = readingService;
     }
 
     @Transactional
@@ -40,6 +44,12 @@ public class CustomerApplicationServiceImpl implements CustomerApplicationServic
     @Transactional
     @Override
     public void deleleteCustomerById(Long id) {
+        List<Reading> readings = readingService.getReadingByCustomerId(id);
+        
+        for (Reading reading : readings) {
+            reading.setCustomer(null);
+        }
+
         customerService.deleleteCustomerById(id);
     }
 
