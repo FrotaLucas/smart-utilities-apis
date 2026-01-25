@@ -77,7 +77,7 @@ public class ReadingServiceImpl implements ReadingService {
     }
 
     @Override
-    public Reading getReadingByCustomerId(Long id) {
+    public Reading getReadingByCustomerId(Long customerId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getReadingByCustomerId'");
     }
