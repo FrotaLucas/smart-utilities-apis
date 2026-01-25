@@ -48,9 +48,14 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
     }
 
     @Override
-    public Reading getReadingById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getReadingById'");
+    public Reading getReadingById(Long id)
+    {
+        Reading dbReading = readingService.getReadingById(id);
+
+        //toDo
+        //handle not found exception
+
+        return dbReading;
     }
 
     @Override
