@@ -18,8 +18,7 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
 
     private final CustomerService customerService;
 
-    public ReadingApplicationServiceImpl(ReadingService readingService, CustomerService customerService)
-    {
+    public ReadingApplicationServiceImpl(ReadingService readingService, CustomerService customerService) {
         this.readingService = readingService;
         this.customerService = customerService;
     }
@@ -28,63 +27,60 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
     @Override
     public Reading createReading(Reading reading) {
 
-        Customer customer = new Customer();
+        Customer customer = reading.getCustomer();
 
-        
-        Customer dbCustomer = customerService.getCustomerById(reading.getCustomer().getId());
-
-        if(dbCustomer == null)
-        {
+        if (reading.getCustomer() == null || reading.getCustomer().getId() == null) {
             customer = customerService.createCustomer(reading.getCustomer());
         }
-        else
-        {
-            customer = dbCustomer;
+
+        else {
+            Customer dbCustomer = customerService.getCustomerById(reading.getCustomer().getId());
+            if (dbCustomer == null) {
+                customer = customerService.createCustomer(reading.getCustomer());
+            } else {
+                customer = dbCustomer;
+            }
         }
 
         reading.setCustomer(customer);
-        
         return readingService.createReading(reading);
     }
 
     @Override
-    public Reading getReadingById(Long id)
-    {
+    public Reading getReadingById(Long id) {
         Reading dbReading = readingService.getReadingById(id);
 
-        //toDo
-        //handle not found exception
+        // toDo
+        // handle not found exception
 
         return dbReading;
     }
 
     @Override
     public List<Reading> getAllReadings() {
-        
+
         List<Reading> allReadings = readingService.getAllReadings();
         // toDo
-        //handle empty list exception
+        // handle empty list exception
 
         return allReadings;
     }
 
     @Override
-    public void deleleteReadingById(Long id)
-    {
+    public void deleleteReadingById(Long id) {
 
-        //check if reading exists
+        // check if reading exists
 
-        readingService.deleleteReadingById(id); 
+        readingService.deleleteReadingById(id);
 
     }
 
     @Override
-    public Reading updateReading(Long id, Reading reading)
-    {
+    public Reading updateReading(Long id, Reading reading) {
         Reading updatedReading = readingService.updateReading(id, reading);
 
         return updatedReading;
-    
+
     }
-    
+
 }
