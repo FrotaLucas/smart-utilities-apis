@@ -16,12 +16,12 @@ import jakarta.persistence.OneToMany;
 @Entity
 @Table(name = "customers")
 public class Customer {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)    
+    @Column(nullable = false, unique = true)
     private UUID uuid;
 
     @Column(name = "first_name", nullable = false)
@@ -38,11 +38,11 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = jakarta.persistence.CascadeType.ALL, orphanRemoval = true)
     private List<Reading> readings = new ArrayList<>();
 
-    //delete this constructor
+    // delete this constructor
     public Customer() {
         this.uuid = UUID.randomUUID();
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -82,5 +82,5 @@ public class Customer {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    
+
 }
