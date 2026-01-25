@@ -64,9 +64,13 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
     }
 
     @Override
-    public void deleleteReadingById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleleteReadingById'");
+    public void deleleteReadingById(Long id)
+    {
+
+        //check if reading exists
+
+        readingService.deleleteReadingById(id); 
+
     }
 
     @Override
