@@ -1,7 +1,8 @@
 package project.demo.domain.service.User;
 
-import org.apache.catalina.User;
+import java.util.Optional;
 
+import project.demo.domain.entities.User;
 import project.demo.infrastructure.repository.user.UserRepository;
 
 public class UserServiceImpl implements UserService {
@@ -10,7 +11,7 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }   
+    }
 
     @Override
     public String Login(String email, String password) {
@@ -19,20 +20,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void Register(User user, String password) {
-        
+    public boolean Register(User user, String password) {
 
-        return;
+        Optional<User> existingUser = userRepository.findByEmailIgnoreCase(user.getEmail());
+
+        if(existingUser!= null || existingUser.isPresent()){
+            return false;
+        }
+
+        byte[] passwordHash = new byte[64];
+        byte[] passwordSalt = new byte[64];
+
+        CreatePassword(passwordHash, passwordSalt, password);
+
+        user.setPasswordHash(passwordHash);
+        user.setPasswordSalt(passwordSalt);     
+
+        userRepository.save(user);
+        return true;
     }
-    
 
-    private String CreatePassword( byte[] hashPassword, byte[] saltPassword, String password){
+    private void CreatePassword(byte[] hashPassword, byte[] saltPassword, String password) {
         // Implementation of password creation logic
-        return "hashed_" + password;
     }
 
-    private String GenerateToken(String email, String name){
+    private String GenerateToken(String email, String name) {
         // Implementation of token generation logic
         return "token_for_" + email;
     }
+
 }
