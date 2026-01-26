@@ -44,7 +44,7 @@ public class UserController {
         if (isCreated) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.badRequest().build();
     }
 
     //Login with post is more secure than get
