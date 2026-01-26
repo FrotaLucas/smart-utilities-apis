@@ -38,13 +38,17 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Reading> readings = new ArrayList<>();
 
-    // delete this constructor
+    // Construtor
     public Customer() {
         this.uuid = UUID.randomUUID();
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public UUID getUuid() {
@@ -83,8 +87,11 @@ public class Customer {
         this.gender = gender;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public List<Reading> getReadings() {
+        return readings;
     }
 
+    public void setReadings(List<Reading> readings) {
+        this.readings = readings;
+    }
 }
