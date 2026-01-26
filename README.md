@@ -22,7 +22,7 @@
 
 ### Smart Utilities Management System
 
-The Smart Utilities Management System aims to modernize how utility companies manage and understand gas, water, and electricity consumption through a centralized digital platform. As urban environments expand and demand for resources increases, utility companies require modern digital solutions that can scale, adapt, and provide real-time insights. This application was born from the motivation to bridge the gap between raw utility data and actionable intelligence, enabling companies to better understand consumption behavior, reduce waste, and enhance service quality. It reflects a strong desire to innovate within the utilities sector through technology and sustainable resource management to supporting data-driven decision-making. This project is full-stack web application developed with Java Spring Boot. [Link to Frontend](https://github.com/FrotaLucas/smart-utilities-management-system)
+The Smart Utilities Management System aims to modernize how utility companies manage and understand gas, water, and electricity consumption through a centralized digital platform. As urban environments expand and demand for resources increases, utility companies require modern digital solutions that can scale, adapt, and provide real-time insights. This application was born from the motivation to bridge the gap between raw utility data and actionable intelligence, enabling companies to better understand consumption behavior, reduce waste, and enhance service quality. It reflects a strong desire to innovate within the utilities sector through technology and sustainable resource management to supporting data-driven decision-making. This project is full-stack web application developed with Java Spring Boot and Angular. [Link to Frontend](https://github.com/FrotaLucas/smart-utilities-management-system)
 
 ### Update Customer Screen
 Allows editing customer information such as name, family name and birthdate.
@@ -127,10 +127,6 @@ Request Body:
 
 - **Postman**: An API client used for testing and documenting APIs.
 
-- **Visual Studio Code**: A lightweight but powerful source code editor, ideal for frontend development.
-
-- **IntelliJ IDEA**: An integrated development environment (IDE) for Java development.
-
 - **Git**: A distributed version control system for tracking changes in source code during software development.
 
 
@@ -148,11 +144,6 @@ Relationship
 2. Key caractheristics of Entitieas: optional to optional. 
 > *Note: customer can exist without being linked to reading and reading can have its customer_id set to null* <
 
-
-### Sequence Diagram
-
-#### Flow: User  →  UI Layer  →  Controllers  →  Repositories →  Database  →  SQL Server
-![image](https://github.com/user-attachments/assets/2962f44f-6faa-4e09-b008-7c933b49b456)
 
 ## 5. Testing Strategy
 
@@ -206,4 +197,5 @@ git clone https://github.com/FrotaLucas/project_final_v1.git
 ### Let's connect
 
 [LinkedIn](https://www.linkedin.com/in/lucas-dias-frota-9020b2126/)
+
 
