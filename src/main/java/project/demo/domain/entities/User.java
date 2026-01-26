@@ -27,4 +27,44 @@ public class User {
     @Column(name = "role", nullable = true)
     private String role;
 
+    // Getters existentes
+    public String getEmail() {
+        return email;
+    }
+
+    public byte[] getPasswordHash() {
+        return passwordHash;
+    }
+
+    public byte[] getPasswordSalt() {
+        return passwordSalt;
+    }   
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPasswordHash(byte[] passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public void setPasswordSalt(byte[] passwordSalt) {
+        this.passwordSalt = passwordSalt;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
