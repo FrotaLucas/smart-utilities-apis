@@ -1,11 +1,14 @@
 package project.demo.domain.service.User;
 
 import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.util.Arrays;
 import java.util.Optional;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import project.demo.domain.entities.User;
 import project.demo.dto.PasswordData;
@@ -52,14 +55,30 @@ public class UserServiceImpl implements UserService {
             Mac mac = Mac.getInstance("HmacSHA512");
             mac.init(secretKey);
 
-            byte[] hashPassword = mac.doFinal(password.getBytes(StandardCharsets.UTF_8));
             byte[] saltPassword = secretKey.getEncoded();
+            byte[] hashPassword = mac.doFinal(password.getBytes(StandardCharsets.UTF_8));
 
             return new PasswordData(hashPassword, saltPassword);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private boolean VerifyPassword(String password, byte[] storedHash, byte[] storedSalt) {
+        try {
+            Mac mac = Mac.getInstance("HmacSHA512");
+            SecretKeySpec secretkey = new SecretKeySpec(storedSalt, "HmacSHA512");
+
+            mac.init(secretkey);
+
+            byte[] computedHash = mac.doFinal(password.getBytes(StandardCharsets.UTF_8));
+            return Arrays.equals(computedHash, storedHash);
+                
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private String GenerateToken(String email, String name) {
