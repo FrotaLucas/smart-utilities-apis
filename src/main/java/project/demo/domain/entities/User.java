@@ -24,7 +24,7 @@ public class User {
     @Column(name = "password_salt", nullable = false)
     private byte[] passwordSalt;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = true)
     private String role;
 
 }
