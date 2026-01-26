@@ -24,8 +24,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String Login(String email, String password) {
-        // Implementation of login logic
-        return "User logged in with email: " + email;
+
+        Optional<User> existinUser = userRepository.findByEmailIgnoreCase(email);
+
+        //toDo
+        //Client dont know if user exists or password is wrong
+        if (existinUser.isEmpty()) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        User user = existinUser.get();
+
+        boolean isPasswordValid = VerifyPassword(
+                password,
+                user.getPasswordHash(),
+                user.getPasswordSalt());
+
+        if (!isPasswordValid) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        return GenerateToken(user.getEmail(), user.getRole());
     }
 
     @Override
@@ -33,7 +52,8 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> existingUser = userRepository.findByEmailIgnoreCase(user.getEmail());
 
-        if (existingUser != null || existingUser.isPresent()) {
+        if (existingUser.isPresent()) {
+            // throw new RuntimeException("user already exists");
             return false;
         }
 
@@ -46,12 +66,13 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    // refactor try catch
     private PasswordData CreatePassword(String password) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA512");
             SecretKey secretKey = keyGenerator.generateKey();
 
-            //to initialize mac with secret key
+            // to initialize mac with secret key
             Mac mac = Mac.getInstance("HmacSHA512");
             mac.init(secretKey);
 
@@ -65,6 +86,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    // refactor try catch
     private boolean VerifyPassword(String password, byte[] storedHash, byte[] storedSalt) {
         try {
             Mac mac = Mac.getInstance("HmacSHA512");
@@ -74,7 +96,7 @@ public class UserServiceImpl implements UserService {
 
             byte[] computedHash = mac.doFinal(password.getBytes(StandardCharsets.UTF_8));
             return Arrays.equals(computedHash, storedHash);
-                
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
