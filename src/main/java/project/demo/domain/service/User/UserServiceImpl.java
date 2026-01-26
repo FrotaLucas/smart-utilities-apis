@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import project.demo.JwtProperties;
+import project.demo.domain.dto.PasswordDataDto;
 import project.demo.domain.entities.User;
-import project.demo.dto.PasswordData;
 import project.demo.infrastructure.repository.user.UserRepository;
 
 @Service
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        PasswordData passwordData = createPassword(password);
+        PasswordDataDto passwordData = createPassword(password);
 
         user.setPasswordHash(passwordData.hashPassword());
         user.setPasswordSalt(passwordData.saltPassword());
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        PasswordData passwordData = createPassword(newPassword);
+        PasswordDataDto passwordData = createPassword(newPassword);
         user.setPasswordHash(passwordData.hashPassword());
         user.setPasswordSalt(passwordData.saltPassword());
         userRepository.save(user);
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
     }
 
     // refactor try catch
-    private PasswordData createPassword(String password) {
+    private PasswordDataDto createPassword(String password) {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA512");
             SecretKey secretKey = keyGenerator.generateKey();
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
             byte[] saltPassword = secretKey.getEncoded();
             byte[] hashPassword = mac.doFinal(password.getBytes(StandardCharsets.UTF_8));
 
-            return new PasswordData(hashPassword, saltPassword);
+            return new PasswordDataDto(hashPassword, saltPassword);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

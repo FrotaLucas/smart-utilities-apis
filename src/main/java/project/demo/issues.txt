@@ -1,7 +1,5 @@
 ///pendencias
-seria possível reading vir sem nenhum customer ou  com customer Id?
-não devia ser tratado no frontend esse caso?
-
+nao deveria criar Dtos para Reading e Customer tbm?
 //eliminar uuid da aplicacao
 
 *******
