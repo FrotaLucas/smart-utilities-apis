@@ -2,6 +2,9 @@ package project.demo.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.web.bind.annotation.*;
 
 import project.demo.application.Interfaces.ReadingApplicationService;
@@ -13,6 +16,8 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+
+@Tag(name = "Readings", description = "Endpoints of Readings")
 @RestController
 @RequestMapping("/api/readings")
 public class ReadingController {

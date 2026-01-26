@@ -3,6 +3,7 @@ package project.demo.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import project.demo.application.Interfaces.UserApplicationService;
 import project.demo.controller.dto.LoginRequestDto;
 import project.demo.controller.dto.TokenResponseDto;
@@ -16,8 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PatchMapping;
 
-
-
+@Tag(name = "Users", description = "Endpoints of Users")
 @RestController
 @RequestMapping("/api/v1/users") // Versione sua API
 public class UserController {
