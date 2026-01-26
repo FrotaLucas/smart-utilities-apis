@@ -10,5 +10,4 @@ public record ReadingDto(
     Double meterCount,
     boolean substitute,
     LocalDate dateOfReading
-) {
-}
+) {}
