@@ -83,4 +83,8 @@ public class Customer {
         this.gender = gender;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
