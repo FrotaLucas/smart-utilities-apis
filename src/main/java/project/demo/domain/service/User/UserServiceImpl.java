@@ -1,8 +1,14 @@
 package project.demo.domain.service.User;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
+
 import project.demo.domain.entities.User;
+import project.demo.dto.PasswordData;
 import project.demo.infrastructure.repository.user.UserRepository;
 
 public class UserServiceImpl implements UserService {
@@ -24,24 +30,36 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> existingUser = userRepository.findByEmailIgnoreCase(user.getEmail());
 
-        if(existingUser!= null || existingUser.isPresent()){
+        if (existingUser != null || existingUser.isPresent()) {
             return false;
         }
 
-        byte[] passwordHash = new byte[64];
-        byte[] passwordSalt = new byte[64];
+        PasswordData passwordData = CreatePassword(password);
 
-        CreatePassword(passwordHash, passwordSalt, password);
-
-        user.setPasswordHash(passwordHash);
-        user.setPasswordSalt(passwordSalt);     
+        user.setPasswordHash(passwordData.hashPassword());
+        user.setPasswordSalt(passwordData.saltPassword());
 
         userRepository.save(user);
         return true;
     }
 
-    private void CreatePassword(byte[] hashPassword, byte[] saltPassword, String password) {
-        // Implementation of password creation logic
+    private PasswordData CreatePassword(String password) {
+        try {
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("HmacSHA512");
+            SecretKey secretKey = keyGenerator.generateKey();
+
+            //to initialize mac with secret key
+            Mac mac = Mac.getInstance("HmacSHA512");
+            mac.init(secretKey);
+
+            byte[] hashPassword = mac.doFinal(password.getBytes(StandardCharsets.UTF_8));
+            byte[] saltPassword = secretKey.getEncoded();
+
+            return new PasswordData(hashPassword, saltPassword);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String GenerateToken(String email, String name) {
