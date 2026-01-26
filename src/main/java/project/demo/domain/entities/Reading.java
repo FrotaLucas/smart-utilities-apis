@@ -98,7 +98,7 @@ public class Reading {
         this.meterCount = meterCount;
     }
 
-    public boolean isSubstitute() {
+    public boolean getSubstitute() {
         return substitute;
     }
 
@@ -114,4 +114,7 @@ public class Reading {
         this.dateOfReading = dateOfReading;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

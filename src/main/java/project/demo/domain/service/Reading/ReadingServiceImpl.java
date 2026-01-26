@@ -72,7 +72,7 @@ public class ReadingServiceImpl implements ReadingService {
         dbReading.setComment(reading.getComment());
         dbReading.setMeterId(reading.getMeterId());
         dbReading.setMeterCount(reading.getMeterCount());
-        dbReading.setSubstitute(reading.isSubstitute());
+        dbReading.setSubstitute(reading.getSubstitute());
         dbReading.setDateOfReading(reading.getDateOfReading());
 
         readingRepository.save(dbReading);
