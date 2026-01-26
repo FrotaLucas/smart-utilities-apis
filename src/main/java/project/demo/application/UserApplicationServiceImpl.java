@@ -1,12 +1,13 @@
 package project.demo.application;
 
 import project.demo.application.Interfaces.UserApplicationService;
+import project.demo.domain.service.User.UserService;
 
 public class UserApplicationServiceImpl implements UserApplicationService {
 
-    private final UserApplicationService userApplicationService;
+    private final UserService userApplicationService;
 
-    public UserApplicationServiceImpl(UserApplicationService userApplicationService) {
+    public UserApplicationServiceImpl(UserService userApplicationService) {
         this.userApplicationService = userApplicationService;
     }
 
