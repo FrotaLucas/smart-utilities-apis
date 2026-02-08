@@ -31,7 +31,7 @@ public class ReadingController {
     @PostMapping
     public ResponseEntity<ReadingDto> createReading(@RequestBody ReadingDto readingDto) {
 
-        Reading reading = new Reading();
+        Reading reading = new Reading(); // No entity types to import and use here.
         reading.setId(readingDto.id());
         reading.setKindOfMeter(readingDto.kindOfMeter());
         reading.setComment(readingDto.comment());
@@ -42,6 +42,7 @@ public class ReadingController {
 
         Reading createdReading = readingService.createReading(reading);
 
+        // Entity-to-DTO conversion to do in Service class, not in Controller class
         ReadingDto responseDto = new ReadingDto(
                 createdReading.getId(),
                 createdReading.getKindOfMeter(),

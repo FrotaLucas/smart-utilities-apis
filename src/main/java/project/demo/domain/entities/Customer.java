@@ -22,7 +22,7 @@ public class Customer {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private UUID uuid;
+    private UUID uuid; // What is the design thinking for having Long id and UUID uuid both? What is the use of uuid, if it is not the @Id?
 
     @Column(name = "first_name", nullable = false)
     private String firstName;

@@ -17,7 +17,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer createCustomer(Customer customer) {
+    // Return type to be a DTO type. See: https://github.com/rishiraj88/order-manager/blob/main/V1java/product/src/main/java/om/product/service/ProductServiceImpl.java
+    public Customer createCustomer(Customer customer /* User DTO as parameter here and convert that into Entity type in this method by calling a util/helper.*/) {
 
         // toDo: handle validation
         // customer null check

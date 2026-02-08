@@ -32,12 +32,16 @@ public class Reading {
     @Column(name = "meter_id")
     private String meterId;
 
+    // Think of using some constraints, such as:
+    //@NotEmpty(message="meter count is mandatory.")
     @Column(name = "meter_count")
     private Double meterCount;
 
     @Column(name = "substitute")
     private boolean substitute;
 
+    // Think of using some constraints, such as:
+    //@PastOrPresent(message = "Future date/time is not permitted.")
     @Column(name = "date_of_reading")
     private LocalDate dateOfReading;
 
@@ -49,6 +53,7 @@ public class Reading {
         this.uuid = UUID.randomUUID();
     }
 
+    // Better practice to use some helper/automation/tool for getter-setter generation, like lombok
     public Long getId() {
         return id;
     }

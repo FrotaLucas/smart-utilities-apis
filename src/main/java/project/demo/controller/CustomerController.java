@@ -26,7 +26,7 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto) {
 
-        Customer customer = new Customer();
+        Customer customer = new Customer(); // Entity must not be used in Controller. DTO types alone must be imported and used here, as per need.
         customer.setId(customerDto.id());
         customer.setFirstName(customerDto.firstName());
         customer.setLastName(customerDto.lastName());

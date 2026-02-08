@@ -1,4 +1,4 @@
-package project.demo.application.Interfaces;
+package project.demo.application.Interfaces; //only lowercase names to use, by convention
 
 import project.demo.domain.entities.User;
 

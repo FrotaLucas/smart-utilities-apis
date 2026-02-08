@@ -30,15 +30,18 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody UserRegistrationDto userDto) {
-        
+
+        // DTO-to-Entity conversion should happen in Service class, not here.
+        // start
         User newUser = new User();
         newUser.setFirstName(userDto.firstName());
         newUser.setLastName(userDto.lastName());
         newUser.setEmail(userDto.email());
 
         String password = userDto.password();
+        // end
 
-
+        // The method name to begin with a small letter: Register(arg1, arg2)
         boolean isCreated = userApplicationService.Register(newUser, password);
         
         if (isCreated) {
