@@ -34,7 +34,7 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
 
         if(reading.getCustomer() == null)
         {
-             throw new IllegalArgumentException("CustomerId must be provided");
+             throw new IllegalArgumentException("Customer must be provided");
         }
 
         if (reading.getCustomer().getId() == null) {
