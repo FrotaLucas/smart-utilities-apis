@@ -7,8 +7,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.web.bind.annotation.*;
 
+import project.demo.application.dto.ReadingDto;
 import project.demo.application.interfaces.ReadingApplicationService;
-import project.demo.controller.dto.ReadingDto;
 import project.demo.domain.entities.Reading;
 
 import java.util.List;

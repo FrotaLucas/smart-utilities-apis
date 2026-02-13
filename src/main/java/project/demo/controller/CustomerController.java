@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import project.demo.application.dto.CustomerDto;
 import project.demo.application.interfaces.CustomerApplicationService;
-import project.demo.controller.dto.CustomerDto;
 import project.demo.domain.entities.Customer;
 
 
