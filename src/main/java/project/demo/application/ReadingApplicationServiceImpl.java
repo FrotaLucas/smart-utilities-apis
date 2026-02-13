@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import project.demo.application.dto.ReadingDto;
 import project.demo.application.interfaces.ReadingApplicationService;
+import project.demo.application.mapper.ReadingMapper;
 import project.demo.domain.entities.Customer;
 import project.demo.domain.entities.Reading;
 import project.demo.domain.service.Customer.CustomerService;
@@ -25,11 +27,17 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
 
     @Transactional
     @Override
-    public Reading createReading(Reading reading) {
+    public ReadingDto createReading(ReadingDto readingDto) {
 
+        Reading reading = ReadingMapper.toEntity(readingDto);
         Customer customer = reading.getCustomer();
 
-        if (reading.getCustomer() == null || reading.getCustomer().getId() == null) {
+        if(reading.getCustomer() == null)
+        {
+             throw new IllegalArgumentException("CustomerId must be provided");
+        }
+
+        if (reading.getCustomer().getId() == null) {
             customer = customerService.createCustomer(reading.getCustomer());
         }
 
@@ -43,29 +51,36 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
         }
 
         reading.setCustomer(customer);
-        return readingService.createReading(reading);
+        Reading createdReading = readingService.createReading(reading);
+
+
+        return ReadingMapper.toDto(createdReading);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Reading getReadingById(Long id) {
+    public ReadingDto getReadingById(Long id) {
         Reading dbReading = readingService.getReadingById(id);
 
         // toDo
         // handle not found exception
 
-        return dbReading;
+        return ReadingMapper.toDto(dbReading);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<Reading> getAllReadings() {
+    public List<ReadingDto> getAllReadings() {
 
         List<Reading> allReadings = readingService.getAllReadings();
         // toDo
         // handle empty list exception
 
-        return allReadings;
+        return allReadings
+                .stream()
+                .map(reading -> ReadingMapper.toDto(reading))
+                .toList();
+
     }
 
     @Transactional
@@ -78,11 +93,11 @@ public class ReadingApplicationServiceImpl implements ReadingApplicationService 
 
     @Transactional
     @Override
-    public Reading updateReading(Long id, Reading reading) {
+    public ReadingDto updateReading(Long id, ReadingDto readingDto) {
+        Reading reading = ReadingMapper.toEntity(readingDto);
         Reading updatedReading = readingService.updateReading(id, reading);
 
-        return updatedReading;
-
+        return ReadingMapper.toDto(updatedReading);
     }
 
 }

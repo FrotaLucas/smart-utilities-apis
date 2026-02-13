@@ -2,17 +2,17 @@ package project.demo.application.interfaces;
 
 import java.util.List;
 
-import project.demo.domain.entities.Reading;
+import project.demo.application.dto.ReadingDto;
 
 public interface ReadingApplicationService {
     
-    Reading createReading(Reading reading);
+    ReadingDto createReading(ReadingDto reading);
 
-    Reading getReadingById (Long id);
+    ReadingDto getReadingById (Long id);
  
-    List<Reading> getAllReadings();
+    List<ReadingDto> getAllReadings();
 
     boolean deleleteReadingById (Long id);
 
-    Reading updateReading (Long id, Reading reading);
+    ReadingDto updateReading (Long id, ReadingDto reading);
 }
