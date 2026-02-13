@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import project.demo.application.Interfaces.UserApplicationService;
+import project.demo.application.interfaces.UserApplicationService;
 import project.demo.controller.dto.LoginRequestDto;
 import project.demo.controller.dto.TokenResponseDto;
 import project.demo.controller.dto.UserChangePasswordDto;

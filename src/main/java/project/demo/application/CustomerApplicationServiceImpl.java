@@ -1,6 +1,6 @@
 package project.demo.application;
 
-import project.demo.application.Interfaces.CustomerApplicationService;
+import project.demo.application.interfaces.CustomerApplicationService;
 import project.demo.domain.entities.Customer;
 import project.demo.domain.entities.Reading;
 import project.demo.domain.service.Customer.CustomerService;

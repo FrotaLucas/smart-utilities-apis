@@ -1,4 +1,4 @@
-package project.demo.application.Interfaces;
+package project.demo.application.interfaces;
 
 import java.util.List;
 
