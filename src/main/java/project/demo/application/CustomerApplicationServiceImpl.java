@@ -1,6 +1,8 @@
 package project.demo.application;
 
+import project.demo.application.dto.CustomerDto;
 import project.demo.application.interfaces.CustomerApplicationService;
+import project.demo.application.mapper.CustomerMapper;
 import project.demo.domain.entities.Customer;
 import project.demo.domain.entities.Reading;
 import project.demo.domain.service.Customer.CustomerService;
@@ -25,20 +27,29 @@ public class CustomerApplicationServiceImpl implements CustomerApplicationServic
 
     @Transactional
     @Override
-    public Customer createCustomer(Customer customer) {
-        return customerService.createCustomer(customer);
+    public CustomerDto createCustomer(CustomerDto customerDto) {
+        Customer customer = CustomerMapper.toEntity(customerDto);
+
+        Customer createdCustomer = this.customerService.createCustomer(customer);
+
+        return CustomerMapper.toDto(createdCustomer);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Customer getCustomerById(Long id) {
-        return customerService.getCustomerById(id);
+    public CustomerDto getCustomerById(Long id) {
+        Customer customer =  customerService.getCustomerById(id);
+
+        return CustomerMapper.toDto(customer);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<Customer> getAllCustomers() {
-        return customerService.getAllCustomers();
+    public List<CustomerDto> getAllCustomers() {
+         return customerService.getAllCustomers()
+            .stream()
+            .map(customer -> CustomerMapper.toDto(customer))
+            .toList();
     }
 
     @Transactional
@@ -56,7 +67,12 @@ public class CustomerApplicationServiceImpl implements CustomerApplicationServic
 
     @Transactional
     @Override
-    public Customer updateCustomer(Long id, Customer customer) {
-        return customerService.updateCustomer(id, customer);
+    public CustomerDto updateCustomer(Long id, CustomerDto customerDto) {
+
+        Customer customer = CustomerMapper.toEntity(customerDto);
+
+        Customer updatedCustomer = customerService.updateCustomer(id, customer);
+
+            return CustomerMapper.toDto(updatedCustomer);
     }
 }

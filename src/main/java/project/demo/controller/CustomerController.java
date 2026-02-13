@@ -26,23 +26,8 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto) {
 
-        Customer customer = new Customer();
-        customer.setId(customerDto.id());
-        customer.setFirstName(customerDto.firstName());
-        customer.setLastName(customerDto.lastName());
-        customer.setGender(customerDto.gender());
-        customer.setBirthDate(customerDto.birthDate());
-
-        Customer createdCustomer = customerService.createCustomer(customer);
-
-        CustomerDto responseDto = new CustomerDto(
-                createdCustomer.getId(),
-                createdCustomer.getFirstName(),
-                createdCustomer.getLastName(),
-                createdCustomer.getGender(),
-                createdCustomer.getBirthDate()
-        );
-
+        CustomerDto responseDto = customerService.createCustomer(customerDto);
+    
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(responseDto);
@@ -51,34 +36,17 @@ public class CustomerController {
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDto> getCustomerById(@PathVariable Long id) {
 
-        Customer customer = customerService.getCustomerById(id);
+        CustomerDto responseDto = customerService.getCustomerById(id);
 
-        CustomerDto dto = new CustomerDto(
-                customer.getId(),
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getGender(),
-                customer.getBirthDate()
-        );
-
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(responseDto);
     }
 
     @GetMapping
     public ResponseEntity<List<CustomerDto>> getCustomers() {
 
-        List<CustomerDto> customerDtos = customerService.getAllCustomers()
-                .stream()
-                .map(customer -> new CustomerDto(
-                        customer.getId(),
-                        customer.getFirstName(),
-                        customer.getLastName(),
-                        customer.getGender(),
-                        customer.getBirthDate()
-                ))
-                .toList();
+        List<CustomerDto> responseDto = customerService.getAllCustomers();
 
-        return ResponseEntity.ok(customerDtos);
+        return ResponseEntity.ok(responseDto);
     }
 
     @PutMapping("/{id}")
@@ -91,22 +59,8 @@ public class CustomerController {
             return ResponseEntity.badRequest().build();
         }
 
-        Customer customer = new Customer();
-        customer.setId(customerDto.id());
-        customer.setFirstName(customerDto.firstName());
-        customer.setLastName(customerDto.lastName());
-        customer.setGender(customerDto.gender());
-        customer.setBirthDate(customerDto.birthDate());
 
-        Customer updatedCustomer = customerService.updateCustomer(id, customer);
-
-        CustomerDto responseDto = new CustomerDto(
-                updatedCustomer.getId(),
-                updatedCustomer.getFirstName(),
-                updatedCustomer.getLastName(),
-                updatedCustomer.getGender(),
-                updatedCustomer.getBirthDate()
-        );
+        CustomerDto responseDto = customerService.updateCustomer(id, customerDto);
 
         return ResponseEntity.ok(responseDto);
     }

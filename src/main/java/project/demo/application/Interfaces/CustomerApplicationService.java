@@ -2,17 +2,18 @@ package project.demo.application.interfaces;
 
 import java.util.List;
 
+import project.demo.application.dto.CustomerDto;
 import project.demo.domain.entities.Customer;
 
 public interface CustomerApplicationService {
 
-  Customer createCustomer(Customer customer);
+  CustomerDto createCustomer(CustomerDto customer);
 
-  Customer getCustomerById(Long id);
+  CustomerDto getCustomerById(Long id);
 
-  List<Customer> getAllCustomers();
+  List<CustomerDto> getAllCustomers();
 
   boolean deleteCustomerById(Long id);
 
-  Customer updateCustomer(Long id, Customer customer);
+  CustomerDto updateCustomer(Long id, CustomerDto customer);
 }
